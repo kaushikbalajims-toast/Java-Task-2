@@ -73,6 +73,8 @@ class Employee{
             }while(invalidInput);
             if(desg_choice>4 || desg_choice<0){
                 System.out.println("Enter an available option (1-4)\n");
+                System.out.print("Designation choice\n1.Manager\n2.Senior developer\n3.Software developer\n4.Intern\nEnter designation choice: ");
+                desg = scin.nextLine();
             }
         }while(desg_choice>4 || desg_choice<0);
 
@@ -98,6 +100,8 @@ class Employee{
             }while(invalidInput);
             if(dept_choice>5 || dept_choice<0){
                 System.out.println("Enter an available option (1-5)\n");
+                System.out.print("\nDepartment choices \n1.R & D\n2.IT\n3.Admin\n4.HR\n5.Support\nEnter department choice:");
+                dept = scin.nextLine();
             }
         }while(dept_choice>5 || dept_choice<0);
         this.department = department_array[dept_choice-1];
@@ -106,18 +110,22 @@ class Employee{
         this.salary = sal;
     }
 
-    public double SetAllowance(){
+    public void SetAllowance(){
         if(this.designation.compareTo("Manager") == 0){
-            return (20 * this.salary / 100);
+            this.salary+=(20*this.salary/100);
         }
         else{
-            return (10 * this.salary / 100);
+            this.salary+=(10*this.salary/100);
         }
     }
     @Override
     public String toString(){
-        SetAllowance();
-        System.out.println();
-        return ("ID:\t\t\t\t" + this.empID + "\nName:\t\t\t\t" + this.name + "\nDesignation:\t\t\t" + this.designation + "\nDepartment:\t\t\t" + this.department + "\n\nSalary Without allowance\t" + this.salary + "\nSalary with allowance:\t\t" + (this.SetAllowance() + this.salary) + "\nEmployee allowance:\t\t" + this.SetAllowance());
+        System.out.println("-------------------------------------------------");
+        if(this.designation.compareTo("Manager") == 0){
+            return ("\nID:\t\t\t" + this.empID + "\nName:\t\t\t" + this.name + "\nDesignation:\t\t" + this.designation + "\nDepartment:\t\t" + this.department + "\n\nSalary with allowance\t" + this.salary + "\nEmployee allowance:\t" + (this.salary*100/120) + "\n");
+        }
+        else{
+            return ("\nID:\t\t\t" + this.empID + "\nName:\t\t\t" + this.name + "\nDesignation:\t\t" + this.designation + "\nDepartment:\t\t" + this.department + "\n\nSalary with allowance\t" + this.salary + "\nEmployee allowance:\t" + (this.salary*100/110) + "\n");
+        }
     }
 }
