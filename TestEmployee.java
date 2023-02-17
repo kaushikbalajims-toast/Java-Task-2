@@ -23,6 +23,8 @@ public class TestEmployee{
                 }
             }while(invalidInput); // proper choice at this point
 
+            // choice = getAnInteger(1, 1, 0);
+
             if(choice == 1){      // when adding employee
                 System.out.print("Enter name: ");
                 employee.setName(scin.nextLine()); //to validate name
@@ -42,7 +44,7 @@ public class TestEmployee{
                         System.out.println();
                     }
                     if(salary < 10000 && invalidInput!=true){
-                        System.out.println("Enter 5 figure salary");
+                        System.out.println("Enter more than 4 figure salary");
                         invalidInput = true;
                         System.out.println();
                     }
@@ -70,7 +72,6 @@ public class TestEmployee{
             }
         }
 
-
         choice = 1; // choice for attendance menu
         while(choice == 1){
             while(true){
@@ -85,13 +86,12 @@ public class TestEmployee{
                         invalidInput = true;
                     }
                 }while(invalidInput);  //proper choice for attendance menu at this point
-    
+
                 if(choice == 1){
                     if(empList.size()>0){
                         for (Employee emp : empList) {
                             int attendance = 0;
                             invalidInput = false;
-                            do{         //to validate attendance given by user
                                 do{
                                     invalidInput = false;
                                     try{
@@ -102,16 +102,13 @@ public class TestEmployee{
                                             System.out.println("Enter attendance as a number\n");
                                             invalidInput = true;
                                         }
-                                }while(invalidInput);
-                                if(attendance<0){
-                                    System.out.println("Enter positive value for attendance\n");
-                                }
-                            }while(attendance<0);
-                            
+                                        if(attendance<0 && !invalidInput){
+                                            System.out.println("Enter positive value for attendance\n");
+                                            invalidInput = true;
+                                        }
+                                }while(invalidInput);   
                             empHash.put(emp, attendance);  //valid attendance inserted to hashmap
-       
                         }
-        
                     }
                     else{
                         System.out.println("No employees to add attendance to");
@@ -121,7 +118,7 @@ public class TestEmployee{
                 else if(choice == 2){  //to display the eligible list of employees
                     if(empHash.size() > 0){
                         AttendanceMaster am = new AttendanceMaster(empHash);
-                        am.showEligible();
+                        am.showEligibleList();
                     }
                     else{
                         System.out.println("Attendance not entered for any employees\n");
