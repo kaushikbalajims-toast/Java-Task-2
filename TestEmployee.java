@@ -73,63 +73,61 @@ public class TestEmployee{
         }
 
         choice = 1; // choice for attendance menu
-        while(choice == 1){
-            while(true){
-                do{
-                    invalidInput = false;
-                    try{
-                        System.out.print("\n1.Add attendance\n2.Display Eligiblity list\nAny other number to exit\nEnter choice: ");
-                        choice = Integer.parseInt(scin.nextLine());
-                    }
-                    catch(NumberFormatException e){
-                        System.out.println("Enter valid menu option (only numbers)\n");
-                        invalidInput = true;
-                    }
-                }while(invalidInput);  //proper choice for attendance menu at this point
-
-                if(choice == 1){
-                    if(empList.size()>0){
-                        for (Employee emp : empList) {
-                            int attendance = 0;
-                            invalidInput = false;
-                                do{
-                                    invalidInput = false;
-                                    try{
-                                            System.out.print("\nEnter attendance for Employee "+emp.getEmpID() + " " + emp.getName() + ": ");
-                                            attendance = Integer.parseInt(scin.nextLine());
-                                        }
-                                        catch(NumberFormatException e){
-                                            System.out.println("Enter attendance as a number\n");
-                                            invalidInput = true;
-                                        }
-                                        if(attendance<0 && !invalidInput){
-                                            System.out.println("Enter positive value for attendance\n");
-                                            invalidInput = true;
-                                        }
-                                }while(invalidInput);   
-                            empHash.put(emp, attendance);  //valid attendance inserted to hashmap
-                        }
-                    }
-                    else{
-                        System.out.println("No employees to add attendance to");
-                    }
+        while(true){
+            do{
+                invalidInput = false;
+                try{
+                    System.out.print("\n1.Add attendance\n2.Display Eligiblity list\nAny other number to exit\nEnter choice: ");
+                    choice = Integer.parseInt(scin.nextLine());
                 }
-    
-                else if(choice == 2){  //to display the eligible list of employees
-                    if(empHash.size() > 0){
-                        AttendanceMaster am = new AttendanceMaster(empHash);
-                        am.showEligibleList();
-                    }
-                    else{
-                        System.out.println("Attendance not entered for any employees\n");
+                catch(NumberFormatException e){
+                    System.out.println("Enter valid menu option (only numbers)\n");
+                    invalidInput = true;
+                }
+            }while(invalidInput);  //proper choice for attendance menu at this point
+
+            if(choice == 1){
+                if(empList.size()>0){
+                    for (Employee emp : empList){
+                        int attendance = 0;
+                        invalidInput = false;
+                        do{
+                            invalidInput = false;
+                            try{
+                                System.out.print("\nEnter attendance for Employee "+emp.getEmpID() + " " + emp.getName() + ": ");
+                                attendance = Integer.parseInt(scin.nextLine());
+                            }
+                            catch(NumberFormatException e){
+                                System.out.println("Enter attendance as a number\n");
+                                invalidInput = true;
+                            }
+                            if(attendance<0 && !invalidInput){
+                                System.out.println("Enter positive value for attendance\n");
+                                invalidInput = true;
+                            }
+                        }while(invalidInput);   
+                        empHash.put(emp, attendance);  //valid attendance inserted to hashmap
                     }
                 }
                 else{
-                    System.out.println("Bye Bye");
-                    System.exit(0);
+                    System.out.println("No employees to add attendance to");
                 }
             }
+
+            else if(choice == 2){  //to display the eligible list of employees
+                if(empHash.size() > 0){
+                    AttendanceMaster am = new AttendanceMaster(empHash);
+                    am.showEligibleList();
+                }
+                else{
+                    System.out.println("Attendance not entered for any employees\n");
+                }
+            }
+            else{
+                System.out.println("Bye Bye");
+                scin.close();
+                System.exit(0);
+            }
         }
-        scin.close();
     }
 }

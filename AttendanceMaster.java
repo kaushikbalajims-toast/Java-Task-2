@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 public class AttendanceMaster {
     private HashMap<Employee, Integer> empAtten = new HashMap<Employee,Integer>();
 
@@ -11,11 +10,11 @@ public class AttendanceMaster {
         return this.empAtten;
     }
 
-    public void showEligible(){
+    public void showEligibleList(){
         System.out.println("---------- Eligible employees ----------\n");
         ArrayList<Employee> emList = new ArrayList<Employee>(this.empAtten.keySet()) ;
         for (Employee emp : emList) {
-            if(this.empAtten.get(emp) > 10){
+            if(this.empAtten.get(emp) > 9){
                 System.out.println(emp.toString());
             }
         }
