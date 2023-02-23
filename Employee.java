@@ -9,15 +9,8 @@ class Employee{
     private double salary;
 
     Employee(){
-        this.empID = counter++;
-    }
-
-    Employee(String name, String dept, String desg, double sal){
-        this.name = name;
-        this.designation = desg;
-        this.department = dept;
-        this.salary = sal;
-        this.empID = counter++;
+        // this.empID = counter;
+        // ++counter;
     }
 
     public int getEmpID(){
@@ -40,8 +33,14 @@ class Employee{
         this.empID = id;
     }
     public void setName(String name){
+        boolean starting = true;
         Scanner sc = new Scanner(System.in);
         while(true){
+            if(starting == true){
+                System.out.print("Enter name: ");
+                name = sc.nextLine();
+                starting = false;
+            }
             if(name.matches("^[A-Z][a-zA-Z ]+")){
                 break;
             }
@@ -52,13 +51,20 @@ class Employee{
             }
         }
         this.name = name;
+        this.empID = counter++;
     }
     public void setDesg(String desg){
         String[] designation_array = {"Manager", "Senior developer", "Software developer", "Intern"};
         Scanner scin = new Scanner(System.in);
+        boolean starting = true;
         boolean invalidInput = false;
         int desg_choice = 0;
         do{
+            if(starting == true){
+                System.out.print("\nDesignation choice\n1.Manager\n2.Senior developer\n3.Software developer\n4.Intern\nEnter designation choice: ");
+                desg = scin.nextLine();
+                starting = false;
+            }
             invalidInput = false;
             try{
                 desg_choice = Integer.parseInt(desg);
@@ -82,8 +88,14 @@ class Employee{
         String[] department_array = {"R & D", "IT", "Admin", "HR", "Support"};
         Scanner scin = new Scanner(System.in);
         boolean invalidInput;
+        boolean starting = true;
         int dept_choice = 0;
         do{
+            if(starting){
+                System.out.print("\nDepartment choices \n1.R & D\n2.IT\n3.Admin\n4.HR\n5.Support\nEnter department choice: ");
+                dept = scin.nextLine();
+                starting = false;
+            }
             invalidInput = false;
                 try{
                     dept_choice = Integer.parseInt(dept);
@@ -105,6 +117,7 @@ class Employee{
     }
     public void setSal(double sal){
         this.salary = sal;
+        this.SetAllowance();
     }
 
     public void SetAllowance(){

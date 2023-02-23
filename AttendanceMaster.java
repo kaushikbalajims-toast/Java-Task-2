@@ -1,9 +1,9 @@
 import java.util.*;
 
 public class AttendanceMaster {
-    private HashMap<Employee, Integer> empAtten = new HashMap<Employee,Integer>();
+    private LinkedHashMap<Employee, Integer> empAtten = new LinkedHashMap<Employee,Integer>();
 
-    AttendanceMaster( HashMap<Employee, Integer> emphash){
+    AttendanceMaster( LinkedHashMap<Employee, Integer> emphash){
         this.empAtten = emphash;
     }
     public HashMap<Employee,Integer> getEmpAtten(){
