@@ -116,6 +116,31 @@ class Employee{
         this.department = department_array[dept_choice-1];
     }
     public void setSal(double sal){
+        Scanner scin = new Scanner(System.in);
+        boolean invalidInput;
+        boolean starting = true;
+
+        do{
+            invalidInput = false;
+            if(starting == true){
+                System.out.print("Enter Salary: ");
+                starting = false;
+            }
+            try{
+                sal = Double.parseDouble(scin.nextLine());
+            }
+            catch(NumberFormatException e){
+                System.out.println("Enter valid salary");
+                invalidInput = true;
+                System.out.print("Enter Salary: ");
+            }
+            if(sal < 10000 && invalidInput!=true){
+                System.out.println("Enter more than 4 figure salary");
+                invalidInput = true;
+                System.out.print("Enter Salary: ");
+            }
+        }while(invalidInput);
+
         this.salary = sal;
         this.SetAllowance();
     }
