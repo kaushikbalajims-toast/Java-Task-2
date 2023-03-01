@@ -9,8 +9,6 @@ class Employee{
     private double salary;
 
     Employee(){
-        // this.empID = counter;
-        // ++counter;
     }
 
     public int getEmpID(){
